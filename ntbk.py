@@ -18,7 +18,7 @@ from rich.markdown import Markdown
 # ==============================================================================
 
 
-def add_new_note(extension):
+def add_note(extension):
 
     command = f"nvim {notes_directory_path}/{timestamp}."+extension
     subprocess.run(command, shell=True)
@@ -26,7 +26,7 @@ def add_new_note(extension):
 #
 #
 
-def search_all_notes(pattern):
+def search_notes(pattern):
 
     all_notes = os.listdir(notes_directory_path)
 
@@ -55,7 +55,7 @@ def search_all_notes(pattern):
 #
 #
 
-def list_all_notes():
+def list_notes():
 
     all_notes = os.listdir(notes_directory_path)
 
@@ -91,7 +91,7 @@ def delete_notes(note):
 #
 #
 
-def render_notes_list(notes_list):
+def render_notes(notes_list):
 
     if len(notes_list) != 0:
 
@@ -139,10 +139,10 @@ def main():
         if option == "new" or option == "n":
 
             if len(sys.argv) == 2:
-                add_new_note("md")
+                add_note("md")
 
             elif len(sys.argv) == 3:
-                add_new_note(sys.argv[2])
+                add_note(sys.argv[2])
 
         elif option == "find" or option == "f":
 
@@ -153,8 +153,8 @@ def main():
 
                 pattern = sys.argv[2]
 
-                notes_list = search_all_notes(pattern)
-                render_notes_list(notes_list)
+                notes_list = search_notes(pattern)
+                render_notes(notes_list)
 
         elif option == "edit" or option == "e" or \
              option == "view" or option == "v":
@@ -166,8 +166,8 @@ def main():
 
                 pattern = sys.argv[2]
 
-                notes_list = search_all_notes(pattern)
-                render_notes_list(notes_list)
+                notes_list = search_notes(pattern)
+                render_notes(notes_list)
 
                 if len(notes_list) == 1:
                     note = notes_list[0]
@@ -190,8 +190,8 @@ def main():
                 set = sys.argv[2]
 
                 if set == "all" or set == "a":
-                    notes_list = list_all_notes()
-                    render_notes_list(notes_list)
+                    notes_list = list_notes()
+                    render_notes(notes_list)
 
                 else:
                     print("\nGive a correct option.")
@@ -205,8 +205,8 @@ def main():
 
                 pattern = sys.argv[2]
 
-                notes_list = search_all_notes(pattern)
-                render_notes_list(notes_list)
+                notes_list = search_notes(pattern)
+                render_notes(notes_list)
 
                 if len(notes_list) != 0:
 
